@@ -1,0 +1,28 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Error";
+}
+
+<div class="error-container">
+    <h1>Oops! An Error Occurred</h1>
+    <p>@ViewData["RequestId"]</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go Back Home</a>
+</div>
+
+<style>
+    .error-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .error-container h1 {
+        font-size: 36px;
+        color: #dc3545;
+        margin-bottom: 20px;
+    }
+
+    .error-container p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+</style>

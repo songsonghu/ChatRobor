@@ -1,0 +1,24 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Account Locked";
+}
+
+<div class="lockout-container">
+    <h1>Account Locked</h1>
+    <p>Your account has been locked due to multiple failed login attempts.</p>
+    <p>Please try again later.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go Home</a>
+</div>
+
+<style>
+    .lockout-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .lockout-container h1 {
+        font-size: 36px;
+        color: #ffc107;
+        margin-bottom: 20px;
+    }
+</style>

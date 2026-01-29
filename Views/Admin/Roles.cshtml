@@ -1,0 +1,119 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Admin - Roles";
+}
+
+<h2>Role Management</h2>
+
+<div class="role-form">
+    <h3>Create New Role</h3>
+    <form onsubmit="createRole(event)">
+        <input type="text" id="roleName" placeholder="Role name" required>
+        <button type="submit" class="btn btn-primary">Create Role</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteRole('@role.Id')">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function createRole(event) {
+        event.preventDefault();
+        const roleName = document.getElementById('roleName').value;
+
+        fetch('@Url.Action("CreateRole", "Admin")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'roleName': roleName
+            })
+        }).then(r => r.json()).then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + (data.errors?.join(', ') || data.error));
+            }
+        });
+    }
+
+    function deleteRole(roleId) {
+        if (confirm('Are you sure?')) {
+            // Implementation would go here
+        }
+    }
+</script>
+
+<style>
+    .role-form {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .role-form form {
+        display: flex;
+        gap: 10px;
+    }
+
+    .role-form input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    .btn-primary {
+        background-color: #667eea;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>

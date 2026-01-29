@@ -1,0 +1,23 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="access-denied-container">
+    <h1>Access Denied</h1>
+    <p>You don't have permission to access this resource.</p>
+    <a href="@Url.Action("Index", "Chat")" class="btn btn-primary">Return to Chat</a>
+</div>
+
+<style>
+    .access-denied-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .access-denied-container h1 {
+        font-size: 36px;
+        color: #dc3545;
+        margin-bottom: 20px;
+    }
+</style>
